@@ -15,13 +15,13 @@ Sprite2D::~Sprite2D()
 void Sprite2D::Load()
 {
 	int fileCount = 0;
-	char** filepaths = GetDirectoryFiles("../res", &fileCount);
+	char** filepaths = GetDirectoryFiles("./res", &fileCount);
 
 	for (int i = 0; i < fileCount; i++) {
 		string filepath = filepaths[i];
 
 		if (filepath == "." || filepath == "..") continue;
-		filepath = "../res/" + filepath;
+		filepath = "./res/" + filepath;
 
 		string fileExtension = GetExtension(filepath.c_str());
 		string filename = GetFileNameWithoutExt(filepath.c_str());
@@ -59,23 +59,12 @@ Sprite2D* Sprite2D::GetResource(const string& resourceName)
 	return resourceIterator->second;
 }
 
-bool Sprite2D::IsLoaded()
-{
-	return loadedImage.data != 0u;
-}
-
 void Sprite2D::LoadResource(const char* filename)
 {
-	if (IsLoaded()) {
-		UnloadResource();
-	}
-
 	loadedImage = LoadImage(filename);
 }
 
-void Sprite2D::UnloadResource() 
+void Sprite2D::UnloadResource()
 {
-	if (IsLoaded()) {
-		UnloadImage(loadedImage);
-	}
+	UnloadImage(loadedImage);
 }

@@ -19,7 +19,6 @@ public:
 
 #pragma region Sprite Memebers
 private:
-	bool IsLoaded();
 	void LoadResource(const char* filename);
 	void UnloadResource();
 	Image loadedImage;
